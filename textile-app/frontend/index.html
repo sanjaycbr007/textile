@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textile Management App - CBR Textiles</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+</head>
+<body>
+    <!-- Login/Registration Section (Initially Shown) -->
+    <div id="auth-container" class="auth-container">
+        <!-- Login Form -->
+        <div id="login-form-container" class="auth-form-wrapper active">
+            <div class="auth-form">
+                <div class="auth-logo">
+                    <img src="logo.svg" alt="CBR Textiles Logo">
+                </div>
+                <h1>CBR Textiles</h1>
+                <h2>Management System</h2>
+                
+                <form id="login-form" class="auth-form-content">
+                    <div class="form-group">
+                        <label>Username or Email</label>
+                        <input type="text" id="login-username" placeholder="Enter username or email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="login-password" placeholder="Enter password" required>
+                    </div>
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="remember-me">
+                        <label for="remember-me">Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-login">Login</button>
+                </form>
+
+                <div class="auth-link">
+                    Don't have an account? <a href="#" id="show-register-link">Register here</a>
+                </div>
+
+                <div class="demo-credentials">
+                    <p><strong>Demo Credentials:</strong></p>
+                    <p>Username: <code>admin</code></p>
+                    <p>Password: <code>admin123</code></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registration Form -->
+        <div id="register-form-container" class="auth-form-wrapper">
+            <div class="auth-form">
+                <div class="auth-logo">
+                    <img src="logo.svg" alt="CBR Textiles Logo">
+                </div>
+                <h1>Create Account</h1>
+                <h2>Join CBR Textiles</h2>
+
+                <form id="register-form" class="auth-form-content">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="register-fullname" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="register-email" placeholder="Enter email address" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" id="register-username" placeholder="Choose username" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="register-password" placeholder="Enter password (min 6 characters)" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" id="register-confirm-password" placeholder="Confirm password" required>
+                    </div>
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="register-agree" required>
+                        <label for="register-agree">I agree to the terms and conditions</label>
+                    </div>
+                    <button type="submit" class="btn btn-register">Create Account</button>
+                </form>
+
+                <div class="auth-link">
+                    Already have an account? <a href="#" id="show-login-link">Login here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App (Hidden until login) -->
+    <div id="app-container" class="app-container hidden">
+        <!-- Navigation Header -->
+    <header class="navbar" id="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <img src="logo.svg" alt="CBR Textiles Logo" class="logo-small">
+                <span class="brand-name">CBR Textiles</span>
+            </div>
+            <nav class="navbar-nav">
+                <a href="#home" class="nav-link active" data-module="home">Dashboard</a>
+                <a href="#workers" class="nav-link" data-module="workers">Workers</a>
+                <a href="#attendance" class="nav-link" data-module="attendance">Attendance</a>
+                <a href="#payroll" class="nav-link" data-module="payroll">Payroll</a>
+                <a href="#inventory" class="nav-link" data-module="inventory">Inventory</a>
+                <a href="#inward-outward" class="nav-link" data-module="inward-outward">Inward/Outward</a>
+                <a href="#reports" class="nav-link" data-module="reports">Reports</a>
+            </nav>
+            <div class="user-menu">
+                <span class="user-name" id="current-user">Admin</span>
+                <button class="btn-logout" id="logout-btn">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-menu">
+                <div class="menu-section">
+                    <h4 class="menu-title">Management</h4>
+                    <ul class="menu-list">
+                        <li><a href="#workers" class="menu-item" data-module="workers">👥 Worker Management</a></li>
+                        <li><a href="#attendance" class="menu-item" data-module="attendance">📋 Attendance</a></li>
+                        <li><a href="#payroll" class="menu-item" data-module="payroll">💰 Wages & Payroll</a></li>
+                    </ul>
+                </div>
+                <div class="menu-section">
+                    <h4 class="menu-title">Operations</h4>
+                    <ul class="menu-list">
+                        <li><a href="#inventory" class="menu-item" data-module="inventory">📦 Inventory</a></li>
+                        <li><a href="#inward-outward" class="menu-item" data-module="inward-outward">🔄 Inward/Outward</a></li>
+                    </ul>
+                </div>
+                <div class="menu-section">
+                    <h4 class="menu-title">Analytics</h4>
+                    <ul class="menu-list">
+                        <li><a href="#reports" class="menu-item" data-module="reports">📊 Reports & History</a></li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Module -->
+            <section id="home-module" class="module active">
+                <div class="module-header">
+                    <h1>Dashboard</h1>
+                    <p>Welcome to CBR Textiles Management System</p>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon workers-icon">👥</div>
+                        <div class="stat-content">
+                            <h3>Total Workers</h3>
+                            <p class="stat-number" id="total-workers">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon attendance-icon">✓</div>
+                        <div class="stat-content">
+                            <h3>Present Today</h3>
+                            <p class="stat-number" id="present-today">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon payroll-icon">💵</div>
+                        <div class="stat-content">
+                            <h3>Monthly Payroll</h3>
+                            <p class="stat-number" id="monthly-payroll">₹0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon inventory-icon">📦</div>
+                        <div class="stat-content">
+                            <h3>Inventory Items</h3>
+                            <p class="stat-number" id="inventory-items">0</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Worker Management Module -->
+            <section id="workers-module" class="module">
+                <div class="module-header">
+                    <h1>Worker Management</h1>
+                    <button class="btn btn-primary" id="btn-add-worker">+ Add New Worker</button>
+                </div>
+
+                <div class="form-section" id="worker-form-section" style="display: none;">
+                    <h3>Add/Edit Worker</h3>
+                    <form id="worker-form" class="form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Employee Code</label>
+                                <input type="text" id="worker-code" placeholder="e.g., W001" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="worker-name" placeholder="Full Name" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Role</label>
+                                <select id="worker-role" required>
+                                    <option value="">Select Role</option>
+                                    <option value="Tailor">Tailor</option>
+                                    <option value="Cutter">Cutter</option>
+                                    <option value="Helper">Helper</option>
+                                    <option value="Machine Operator">Machine Operator</option>
+                                    <option value="Packer">Packer</option>
+                                    <option value="Supervisor">Supervisor</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Contact Number</label>
+                                <input type="tel" id="worker-contact" placeholder="Phone Number">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Daily Wage Rate (₹)</label>
+                                <input type="number" id="worker-daily-wage" placeholder="Daily wage" min="0" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Shift Based Wage (₹)</label>
+                                <input type="number" id="worker-shift-wage" placeholder="Shift wage" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success">Save Worker</button>
+                            <button type="button" class="btn btn-secondary" id="btn-cancel-worker">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-section">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Contact</th>
+                                <th>Daily Wage</th>
+                                <th>Shift Wage</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="workers-table-body">
+                            <tr class="empty-state">
+                                <td colspan="7">No workers added yet. Click "Add New Worker" to get started.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Attendance Management Module -->
+            <section id="attendance-module" class="module">
+                <div class="module-header">
+                    <h1>Attendance Management</h1>
+                    <div class="header-actions">
+                        <input type="date" id="attendance-date" class="form-control">
+                        <button class="btn btn-primary" id="btn-mark-attendance">Mark Attendance</button>
+                    </div>
+                </div>
+
+                <div class="form-section" id="attendance-form-section" style="display: none;">
+                    <h3>Mark Attendance</h3>
+                    <form id="attendance-form" class="form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Select Worker</label>
+                                <select id="attendance-worker" required>
+                                    <option value="">Choose Worker</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select id="attendance-status" required>
+                                    <option value="">Select Status</option>
+                                    <option value="Present">Present (Full Day)</option>
+                                    <option value="Half Day">Half Day</option>
+                                    <option value="Absent">Absent</option>
+                                    <option value="Leave">Leave</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Notes</label>
+                            <textarea id="attendance-notes" placeholder="Additional notes" rows="3"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success">Save Attendance</button>
+                            <button type="button" class="btn btn-secondary" id="btn-cancel-attendance">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-section">
+                    <h3>Attendance Records</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Worker</th>
+                                <th>Status</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendance-table-body">
+                            <tr class="empty-state">
+                                <td colspan="5">No attendance records found.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Payroll Module -->
+            <section id="payroll-module" class="module">
+                <div class="module-header">
+                    <h1>Wages & Payroll</h1>
+                    <div class="header-actions">
+                        <select id="payroll-period" class="form-control">
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                        <button class="btn btn-primary" id="btn-calculate-payroll">Calculate Payroll</button>
+                    </div>
+                </div>
+
+                <div class="payroll-summary">
+                    <div class="summary-card">
+                        <span>Total Workers</span>
+                        <p id="payroll-total-workers">0</p>
+                    </div>
+                    <div class="summary-card">
+                        <span>Total Payroll</span>
+                        <p id="payroll-total-amount">₹0</p>
+                    </div>
+                    <div class="summary-card">
+                        <span>Avg Per Worker</span>
+                        <p id="payroll-avg-amount">₹0</p>
+                    </div>
+                </div>
+
+                <div class="table-section">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Worker Code</th>
+                                <th>Worker Name</th>
+                                <th>Role</th>
+                                <th>Days Worked</th>
+                                <th>Wage Rate</th>
+                                <th>Total Wages</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="payroll-table-body">
+                            <tr class="empty-state">
+                                <td colspan="7">No payroll data available. Mark attendance first.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Inventory Management Module -->
+            <section id="inventory-module" class="module">
+                <div class="module-header">
+                    <h1>Inventory Management</h1>
+                    <button class="btn btn-primary" id="btn-add-item">+ Add Item</button>
+                </div>
+
+                <div class="form-section" id="inventory-form-section" style="display: none;">
+                    <h3>Add/Edit Inventory Item</h3>
+                    <form id="inventory-form" class="form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Item Code</label>
+                                <input type="text" id="item-code" placeholder="e.g., FAB001" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Item Name</label>
+                                <input type="text" id="item-name" placeholder="Item Name" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Item Type</label>
+                                <select id="item-type" required>
+                                    <option value="">Select Type</option>
+                                    <option value="Fabric">Fabric</option>
+                                    <option value="Yarn">Yarn</option>
+                                    <option value="Garment">Garment</option>
+                                    <option value="Accessories">Accessories</option>
+                                    <option value="Raw Material">Raw Material</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Unit</label>
+                                <select id="item-unit" required>
+                                    <option value="">Select Unit</option>
+                                    <option value="Meters">Meters</option>
+                                    <option value="Kg">Kg</option>
+                                    <option value="Pieces">Pieces</option>
+                                    <option value="Boxes">Boxes</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="number" id="item-quantity" placeholder="Quantity" min="0" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Unit Cost (₹)</label>
+                                <input type="number" id="item-cost" placeholder="Cost per unit" min="0" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="item-description" placeholder="Item description" rows="3"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success">Save Item</button>
+                            <button type="button" class="btn btn-secondary" id="btn-cancel-item">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-section">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>Unit Cost</th>
+                                <th>Total Value</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-table-body">
+                            <tr class="empty-state">
+                                <td colspan="8">No inventory items found.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Inward/Outward Module -->
+            <section id="inward-outward-module" class="module">
+                <div class="module-header">
+                    <h1>Inward & Outward Management</h1>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" id="btn-add-inward">+ Inward Entry</button>
+                        <button class="btn btn-secondary" id="btn-add-outward">+ Outward Entry</button>
+                    </div>
+                </div>
+
+                <div class="form-section" id="movement-form-section" style="display: none;">
+                    <h3 id="movement-form-title">Stock Movement</h3>
+                    <form id="movement-form" class="form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Movement Type</label>
+                                <select id="movement-type" required>
+                                    <option value="">Select Type</option>
+                                    <option value="Inward">Inward (Incoming)</option>
+                                    <option value="Outward">Outward (Outgoing)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="date" id="movement-date" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Item</label>
+                                <select id="movement-item" required>
+                                    <option value="">Select Item</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="number" id="movement-quantity" placeholder="Quantity" min="0" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Purpose/Reference</label>
+                                <input type="text" id="movement-reference" placeholder="e.g., Order#123, Supplier: ABC Inc.">
+                            </div>
+                            <div class="form-group">
+                                <label>Notes</label>
+                                <input type="text" id="movement-notes" placeholder="Additional notes">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success">Record Movement</button>
+                            <button type="button" class="btn btn-secondary" id="btn-cancel-movement">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-section">
+                    <h3>Stock Movement History</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>Reference</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="movement-table-body">
+                            <tr class="empty-state">
+                                <td colspan="7">No stock movements recorded.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Reports Module -->
+            <section id="reports-module" class="module">
+                <div class="module-header">
+                    <h1>Reports & History</h1>
+                    <div class="header-actions">
+                        <input type="date" id="report-start-date" class="form-control">
+                        <input type="date" id="report-end-date" class="form-control">
+                        <button class="btn btn-primary" id="btn-generate-report">Generate Report</button>
+                    </div>
+                </div>
+
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h3>📊 Attendance Report</h3>
+                        <p>View and analyze worker attendance patterns</p>
+                        <button class="btn btn-outline" id="btn-attendance-report">View Report</button>
+                    </div>
+                    <div class="report-card">
+                        <h3>💰 Payroll Report</h3>
+                        <p>Monthly/Weekly/Daily wage calculations</p>
+                        <button class="btn btn-outline" id="btn-payroll-report">View Report</button>
+                    </div>
+                    <div class="report-card">
+                        <h3>📦 Inventory Report</h3>
+                        <p>Stock levels and valuation summary</p>
+                        <button class="btn btn-outline" id="btn-inventory-report">View Report</button>
+                    </div>
+                    <div class="report-card">
+                        <h3>🔄 Stock Movement Report</h3>
+                        <p>Inward and outward stock transactions</p>
+                        <button class="btn btn-outline" id="btn-movement-report">View Report</button>
+                    </div>
+                </div>
+
+                <div class="table-section" id="report-results" style="display: none;">
+                    <h3 id="report-title">Report Results</h3>
+                    <div id="report-content"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 CBR Textiles Management System. All Rights Reserved.</p>
+        </footer>
+
+        <!-- Modal for Confirmations -->
+        <div id="confirm-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h3>Confirm Action</h3>
+                <p id="confirm-message"></p>
+                <div class="modal-actions">
+                    <button class="btn btn-danger" id="btn-confirm">Delete</button>
+                    <button class="btn btn-secondary" id="btn-cancel-modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

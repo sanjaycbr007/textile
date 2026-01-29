@@ -1,0 +1,31 @@
+{
+  "name": "textile-app",
+  "version": "1.0.0",
+  "description": "Professional Textile Management System for CBR Textiles",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "textile",
+    "management",
+    "workers",
+    "payroll",
+    "inventory"
+  ],
+  "author": "CBR Textiles",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "body-parser": "^1.20.2",
+    "sqlite3": "^5.1.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

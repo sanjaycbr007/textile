@@ -1,0 +1,59 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="#1a3a52" stroke="#c41e3a" stroke-width="3"/>
+  
+  <!-- Fabric Weave Pattern Background -->
+  <defs>
+    <pattern id="weave" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="20" y2="20" stroke="#ffffff" stroke-width="1" opacity="0.1"/>
+      <line x1="20" y1="0" x2="0" y2="20" stroke="#ffffff" stroke-width="1" opacity="0.1"/>
+    </pattern>
+  </defs>
+  <rect x="5" y="5" width="190" height="190" fill="url(#weave)"/>
+  
+  <!-- Needle/Thread Icon -->
+  <g id="needle">
+    <!-- Needle -->
+    <path d="M 70 50 Q 75 70 80 90 L 85 100" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Thread -->
+    <path d="M 85 100 Q 90 110 95 120" stroke="#c41e3a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Fabric/Spool Icon -->
+  <g id="fabric">
+    <!-- Spool left -->
+    <circle cx="110" cy="80" r="8" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="110" cy="80" r="4" fill="#ffffff"/>
+    <!-- Spool center -->
+    <rect x="105" y="75" width="10" height="10" fill="none" stroke="#ffffff" stroke-width="1.5" rx="1"/>
+    <!-- Spool right -->
+    <circle cx="130" cy="80" r="8" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="130" cy="80" r="4" fill="#ffffff"/>
+    <!-- Fabric roll -->
+    <ellipse cx="120" cy="88" rx="15" ry="6" fill="none" stroke="#c41e3a" stroke-width="2"/>
+    <path d="M 105 88 Q 120 92 135 88" fill="none" stroke="#c41e3a" stroke-width="1.5" opacity="0.7"/>
+  </g>
+  
+  <!-- Worker/Person Icon -->
+  <g id="worker">
+    <!-- Head -->
+    <circle cx="100" cy="115" r="5" fill="#ffffff"/>
+    <!-- Body -->
+    <rect x="97" y="122" width="6" height="12" fill="#ffffff" rx="1"/>
+    <!-- Arms -->
+    <line x1="97" y1="125" x2="88" y2="128" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="103" y1="125" x2="112" y2="128" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Legs -->
+    <line x1="98" y1="134" x2="96" y2="142" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="102" y1="134" x2="104" y2="142" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Decorative stars -->
+  <g id="stars" fill="#c41e3a" opacity="0.8">
+    <polygon points="140,40 143,48 152,48 146,53 148,62 140,57 132,62 134,53 128,48 137,48"/>
+    <polygon points="60,140 62,146 69,146 64,150 66,157 60,152 54,157 56,150 51,146 58,146"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="100" y="165" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">TEXTILE APP</text>
+</svg>
