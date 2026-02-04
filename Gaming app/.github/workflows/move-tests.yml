@@ -1,0 +1,48 @@
+name: Move Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch: {}
+
+jobs:
+  move-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Rust (required for Sui toolchain build)
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          components: clippy
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential pkg-config libssl-dev curl
+
+      - name: Install Sui devtools
+        run: |
+          set -e
+          curl -sSf https://raw.githubusercontent.com/MystenLabs/sui/main/crates/sui-install/init.sh | bash -s -- --tag nightly || true
+          export PATH="$HOME/.sui/bin:$PATH"
+          echo "Sui version:"; $HOME/.sui/bin/sui --version || true
+
+      - name: Run Move tests
+        env:
+          PATH: ${{ runner.home }}/.sui/bin:${{ env.PATH }}
+        run: |
+          $HOME/.sui/bin/sui move test --path chainloot
+
+      - name: Upload test logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: move-test-logs
+          path: |
+            chainloot/build
+            chainloot/logs || true
